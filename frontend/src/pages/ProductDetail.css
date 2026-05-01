@@ -1,0 +1,141 @@
+.product-detail-page {
+  padding: 40px 0;
+}
+
+.product-detail {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.product-image-large {
+  width: 100%;
+  height: 500px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.product-image-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 24px;
+  background: white;
+}
+
+.product-info h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.product-info .brand {
+  color: #6b7280;
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.price-section {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.price-section .price {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}
+
+.price-section .stock {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.price-section .stock.in-stock {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.price-section .stock.out-of-stock {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.description {
+  margin-bottom: 32px;
+}
+
+.description h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.description p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.specifications {
+  margin-bottom: 32px;
+}
+
+.specifications h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.specifications ul {
+  list-style: none;
+}
+
+.specifications li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.specifications li:last-child {
+  border-bottom: none;
+}
+
+.specifications strong {
+  color: #6b7280;
+  margin-right: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+}
+
+.actions button {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px;
+  }
+  
+  .product-image-large {
+    height: 300px;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+}

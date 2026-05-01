@@ -1,0 +1,193 @@
+.footer {
+  background: #1a1a2e;
+  color: rgba(255,255,255,0.85);
+  margin-top: 60px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 48px;
+  padding: 48px 0 40px;
+}
+
+/* ── Title ───────────────────────────────────────────────────────────────── */
+.footer-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+}
+
+/* ── Links ───────────────────────────────────────────────────────────────── */
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+/* ── Contacts ────────────────────────────────────────────────────────────── */
+.footer-contacts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-contacts li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.contact-label {
+  display: block;
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.footer-contacts span,
+.footer-contacts a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+}
+
+.footer-contacts a:hover {
+  color: var(--primary);
+}
+
+/* ── Social list ─────────────────────────────────────────────────────────── */
+.footer-social-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.social-item:hover { color: white; }
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.social-item.youtube .social-icon  { background: #ff0000; color: white; }
+.social-item.facebook .social-icon { background: #1877f2; color: white; }
+.social-item.instagram .social-icon { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: white; font-size: 16px; }
+.social-item.telegram .social-icon { background: #0088cc; color: white; }
+
+/* ── Bottom bar ──────────────────────────────────────────────────────────── */
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 18px 0;
+}
+
+.footer-bottom .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+}
+
+.footer-bottom-social {
+  display: flex;
+  gap: 10px;
+}
+
+.bottom-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: opacity 0.2s;
+}
+
+.bottom-social-btn:hover { opacity: 0.8; }
+.bottom-social-btn.youtube  { background: #ff0000; color: white; }
+.bottom-social-btn.facebook { background: #1877f2; color: white; }
+.bottom-social-btn.instagram { background: linear-gradient(45deg,#f09433,#dc2743,#bc1888); color: white; font-size: 16px; }
+
+/* ── Scroll to top ───────────────────────────────────────────────────────── */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.4);
+  transition: all 0.2s;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-top-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 0 24px;
+  }
+  .footer-bottom .container {
+    flex-direction: column;
+    text-align: center;
+  }
+}

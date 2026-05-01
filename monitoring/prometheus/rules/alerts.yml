@@ -1,0 +1,101 @@
+groups:
+  # ── API Health ────────────────────────────────────────────────
+  - name: api_health
+    interval: 30s
+    rules:
+      - alert: BackendDown
+        expr: up{job="techstore-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "TechStore Backend is DOWN"
+          description: "Backend service has been unreachable for more than 1 minute."
+
+      - alert: HighErrorRate
+        expr: |
+          rate(techstore_requests_total{status=~"5.."}[5m]) /
+          rate(techstore_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High API error rate ({{ $value | humanizePercentage }})"
+          description: "More than 5% of API requests are returning 5xx errors."
+
+      - alert: SlowAPIResponse
+        expr: |
+          histogram_quantile(0.95,
+            rate(techstore_request_duration_seconds_bucket[5m])
+          ) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "Slow API responses (p95 = {{ $value | humanizeDuration }})"
+          description: "95th percentile response time exceeds 2 seconds."
+
+  # ── Database ──────────────────────────────────────────────────
+  - name: database
+    rules:
+      - alert: DatabaseDown
+        expr: up{job="postgres-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "PostgreSQL is DOWN"
+          description: "Database has been unreachable for more than 1 minute."
+
+      - alert: DatabaseTooManyConnections
+        expr: pg_stat_activity_count > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Too many DB connections ({{ $value }})"
+          description: "PostgreSQL has more than 80 active connections."
+
+  # ── Host Resources ────────────────────────────────────────────
+  - name: host_resources
+    rules:
+      - alert: HighCPUUsage
+        expr: |
+          100 - (avg by(instance) (
+            rate(node_cpu_seconds_total{mode="idle"}[5m])
+          ) * 100) > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: host
+        annotations:
+          summary: "High CPU usage ({{ $value | humanize }}%)"
+          description: "CPU usage has been above 85% for 5 minutes."
+
+      - alert: HighMemoryUsage
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: host
+        annotations:
+          summary: "High memory usage ({{ $value | humanize }}%)"
+          description: "Memory usage has been above 85% for 5 minutes."
+
+      - alert: DiskSpaceLow
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/"} /
+           node_filesystem_size_bytes{mountpoint="/"}) * 100 < 15
+        for: 5m
+        labels:
+          severity: critical
+          service: host
+        annotations:
+          summary: "Low disk space ({{ $value | humanize }}% free)"
+          description: "Less than 15% disk space remaining on root filesystem."

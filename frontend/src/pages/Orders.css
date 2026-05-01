@@ -1,0 +1,127 @@
+.orders-page {
+  padding: 40px 0;
+}
+
+.orders-page h1 {
+  font-size: 32px;
+  margin-bottom: 32px;
+}
+
+.empty-orders {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+}
+
+.empty-orders p {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.order-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.order-header h3 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.order-date {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.order-status .status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.order-status .status.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.order-status .status.processing {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.order-status .status.completed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.order-details {
+  margin-bottom: 20px;
+}
+
+.order-details p {
+  margin-bottom: 8px;
+  color: #4b5563;
+}
+
+.order-items {
+  margin-bottom: 20px;
+}
+
+.order-items h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 2px solid var(--border-color);
+  font-size: 18px;
+}
+
+.total-amount {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .order-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
