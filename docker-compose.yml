@@ -213,16 +213,6 @@ services:
       - techstore-network
     logging: *default-logging
 
-volumes:
-  postgres-data:
-  prometheus-data:
-  grafana-data:
-  jenkins-data:
-
-networks:
-  techstore-network:
-    driver: bridge
-
   # ── Jenkins CI/CD ──────────────────────────────────────────────────────────
   jenkins:
     image: jenkins/jenkins:lts-jdk17
@@ -241,3 +231,13 @@ networks:
     networks:
       - techstore-network
     logging: *default-logging
+
+volumes:
+  postgres-data:
+  prometheus-data:
+  grafana-data:
+  jenkins-data:
+
+networks:
+  techstore-network:
+    driver: bridge
