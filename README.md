@@ -141,7 +141,7 @@ TechStore/
 
 ## Автор
 
-**Марғұлан Жанпейіс**
+**Мархулан Жанпейс**
 GitHub: [@margulanjanpeis-wq](https://github.com/margulanjanpeis-wq)
 
-DevOps курсы жобасы — 2025
+DevOps курсы жобасы — 2026
