@@ -134,12 +134,11 @@ Terraform арқылы Docker ресурстары (network, volumes, containers
 git clone https://github.com/margulanjanpeis-wq/TechStore.git
 cd TechStore
 
-# 2. Контейнерлерді іске қосу
-docker-compose up -d
+# 2. .env файлын жасау
+cp .env.example .env  # немесе қолмен жасаңыз
 
-# 3. Seed деректерді қосу (80 өнім)
-docker cp database/seed_final.sql techstore-db:/tmp/seed.sql
-docker exec techstore-db psql -U techstore_user -d techstore -f /tmp/seed.sql
+# 3. Контейнерлерді іске қосу
+docker compose up -d
 ```
 
 Іске қосылғаннан кейін браузерде ашыңыз: **https://localhost**
@@ -150,10 +149,10 @@ SSL сертификаты self-signed болғандықтан браузер �
 
 ```bash
 # Барлық сервистер іске қосылды ма?
-docker-compose ps
+docker compose ps
 
 # Backend логтарын көру
-docker-compose logs backend
+docker compose logs backend
 
 # Деректер базасына қосылу
 docker exec -it techstore-db psql -U techstore_user -d techstore
@@ -188,6 +187,10 @@ pytest tests/test_products.py -v
 | API Docs | https://localhost/docs | — |
 | Grafana | http://localhost:3000 | admin / admin123 |
 | Prometheus | http://localhost:9090 | — |
+| Jenkins | http://localhost:8090 | — |
+| Alertmanager | http://localhost:9093 | — |
+
+> **Ескерту:** `localhost` орнына сервердің IP адресін пайдалануға болады (мысалы `172.20.10.2`)
 
 ---
 
