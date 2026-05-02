@@ -9,35 +9,60 @@ TechStore жобасында қауіпсіздікке ерекше назар 
 ## Аутентификация
 
 - **JWT Access Token** — 15 минуттық мерзімі бар
-- **Refresh Token** — 7 күндік мерзімі бар, httpOnly cookie-де сақталады (JavaScript оқи алмайды)
-- **SHA256 + salt** — пароль хэштеу алгоритмі
+- **Refresh Token** — 7 күндік мерзімі бар, httpOnly cookie-де сақталады
+- **SHA256 + salt** — пароль хэштеу (`salt:sha256_hash` форматы)
 - Блокталған пайдаланушы жүйеге кіре алмайды (login + token деңгейінде тексеріледі)
+- Admin рөлі бөлек тексеріледі — барлық admin endpoint-тарда
 
 ---
 
 ## Желі қауіпсіздігі
 
 - **HTTPS** — барлық трафик SSL/TLS арқылы өтеді (TLSv1.2/1.3)
-- **HTTP → HTTPS** — автоматты бағыттау
-- **Rate Limiting** — Nginx арқылы: API 60 сұраныс/мин, Auth 20 сұраныс/мин
+- **HTTP → HTTPS** — автоматты бағыттау (Nginx)
+- **Rate Limiting** — Nginx арқылы:
+  - API: 60 сұраныс/мин
+  - Auth: 20 сұраныс/мин (тіркелу/кіру)
 - **HSTS** — браузер тек HTTPS арқылы қосылады
-- **Security Headers** — X-Frame-Options, X-XSS-Protection, Content-Security-Policy
+- **Security Headers:**
+  - `X-Frame-Options: SAMEORIGIN`
+  - `X-XSS-Protection: 1; mode=block`
+  - `X-Content-Type-Options: nosniff`
+  - `Content-Security-Policy`
+  - `Referrer-Policy`
 
 ---
 
 ## Деректер базасы қауіпсіздігі
 
 - SQLAlchemy ORM арқылы SQL injection қорғанысы
-- Деректер базасы тек ішкі Docker желісінде қол жетімді
+- Деректер базасы тек ішкі Docker желісінде қол жетімді (сыртқа ашық емес)
 - Автоматты backup жүйесі (`scripts/backup.sh`)
+- PostgreSQL метрикалары `postgres-exporter` арқылы мониторингте
 
 ---
 
 ## Инфрақұрылым қауіпсіздігі
 
-- Docker контейнерлер оқшауланған желіде жұмыс істейді
+- Docker контейнерлер оқшауланған `techstore-network` желісінде жұмыс істейді
 - `.env` файлы `.gitignore`-да — GitHub-та жарияланбайды
-- Prometheus метрикалары тек ішкі желіден қол жетімді
+- Prometheus `/metrics` endpoint тек ішкі желіден қол жетімді (Nginx-те `allow 172.0.0.0/8`)
+- Nginx `stub_status` тек ішкі желіден қол жетімді
+- Telegram Bot токені `.env` арқылы беріледі — кодта жоқ
+
+---
+
+## Мониторинг және алерттер
+
+- **Prometheus** — барлық сервистердің метрикаларын жинайды
+- **Alertmanager** — алерттерді Telegram-ға жібереді
+- **Алерт ережелері:**
+  - Backend өшіп қалса → 🔴 CRITICAL (1 минутта)
+  - PostgreSQL өшіп қалса → 🔴 CRITICAL (1 минутта)
+  - CPU > 85% → 🟡 WARNING (5 минутта)
+  - RAM > 85% → 🟡 WARNING (5 минутта)
+  - Диск < 15% → 🔴 CRITICAL (5 минутта)
+  - API қате > 5% → 🟡 WARNING (2 минутта)
 
 ---
 
