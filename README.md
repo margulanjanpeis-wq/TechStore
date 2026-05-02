@@ -236,3 +236,16 @@ TechStore/
 GitHub: [@margulanjanpeis-wq](https://github.com/margulanjanpeis-wq)
 
 DevOps курсы жобасы — 2026
+
+---
+
+## Құжаттама
+
+| Файл | Мазмұны |
+|---|---|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Жобаға үлес қосу нұсқаулығы |
+| [SECURITY.md](SECURITY.md) | Қауіпсіздік саясаты және алерт ережелері |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Толық деплой нұсқаулығы |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Жүйе архитектурасының сипаттамасы |
+| [CHANGELOG.md](CHANGELOG.md) | Өзгерістер тарихы |
+| [LICENSE](LICENSE) | MIT лицензиясы |
