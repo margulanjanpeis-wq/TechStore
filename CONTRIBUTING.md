@@ -1,181 +1,110 @@
-# TechStore жобасына үлес қосу
+# Жобаға үлес қосу
 
-Жобаға үлес қосқыңыз келсе, мына нұсқауларды орындаңыз.
+Бұл жоба — TechStore e-commerce платформасы. Егер жобаны жақсартқыңыз келсе немесе қате тапсаңыз, мына нұсқауларды оқыңыз.
 
-## Әзірлеу ортасын орнату
+---
 
-1. Репозиторийді fork жасаңыз
-2. Өз компьютеріңізге клондаңыз:
+## Жобаны өз компьютеріңізге орнату
+
 ```bash
-git clone https://github.com/<your-username>/TechStore.git
+# 1. Репозиторийді клондаңыз
+git clone https://github.com/margulanjanpeis-wq/TechStore.git
 cd TechStore
+
+# 2. Docker арқылы іске қосыңыз
+docker-compose up -d
 ```
 
-3. Жаңа branch жасаңыз:
-```bash
-git checkout -b feature/your-feature-name
-```
+Немесе жергілікті орнату:
 
-4. Әзірлеу ортасын орнатыңыз:
 ```bash
 # Backend
 cd backend
-python -m venv venv
-.\venv\Scripts\activate
 pip install -r requirements.txt
+uvicorn main:app --reload
 
-# Frontend
-cd ../frontend
-npm install
-```
-
-## Код стандарттары
-
-### Python (Backend)
-
-- PEP 8 стандартын сақтаңыз
-- Type hints қолданыңыз
-- Docstrings жазыңыз
-- Black форматтерін қолданыңыз
-
-```python
-def get_product(product_id: int) -> Product:
-    """
-    Тауарды ID бойынша алу.
-    
-    Args:
-        product_id: Тауар идентификаторы
-        
-    Returns:
-        Product объектісі
-        
-    Raises:
-        HTTPException: Тауар табылмаса
-    """
-    pass
-```
-
-### JavaScript/React (Frontend)
-
-- ESLint конфигурациясын сақтаңыз
-- Functional components қолданыңыз
-- Hooks дұрыс пайдаланыңыз
-- Prettier форматтерін қолданыңыз
-
-```javascript
-/**
- * Тауар картасы компоненті
- * @param {Object} product - Тауар объектісі
- */
-function ProductCard({ product }) {
-  // Component logic
-}
-```
-
-### Git Commit хабарламалары
-
-Commit хабарламалары анық және сипаттамалы болуы керек:
-
-```
-feat: Себетке тауар қосу функциясын қосу
-fix: Авторизация қатесін түзету
-docs: README файлын жаңарту
-style: Код форматтауды түзету
-refactor: API клиентін қайта құру
-test: Тауарлар API үшін тесттер қосу
-chore: Dependencies жаңарту
-```
-
-## Pull Request процесі
-
-1. Өзгерістерді commit жасаңыз:
-```bash
-git add .
-git commit -m "feat: жаңа функция қосу"
-```
-
-2. Branch-ті push жасаңыз:
-```bash
-git push origin feature/your-feature-name
-```
-
-3. GitHub-та Pull Request жасаңыз
-
-4. PR сипаттамасында:
-   - Не өзгертілгенін жазыңыз
-   - Неге қажет екенін түсіндіріңіз
-   - Screenshot қосыңыз (UI өзгерістері үшін)
-   - Байланысты issue-ді көрсетіңіз
-
-## Тестілеу
-
-Өзгерістерді жібермес бұрын тестілеңіз:
-
-```bash
-# Backend тестілеу
-cd backend
-pytest
-
-# Frontend тестілеу
+# Frontend (жаңа терминалда)
 cd frontend
-npm test
-
-# Docker тестілеу
-docker-compose up -d
-# Қосымшаны браузерде тексеру
+npm install
+npm run dev
 ```
 
-## Код шолу
+---
 
-- Барлық PR код шолудан өтеді
-- Өзгерістер сұралуы мүмкін
-- Конструктивті пікірлерге ашық болыңыз
+## Жаңа өзгеріс енгізу
 
-## Жобаның құрылымы
+```bash
+# 1. Жаңа branch жасаңыз
+git checkout -b feature/жаңа-функция
+
+# 2. Өзгерістер жасаңыз
+
+# 3. Commit жасаңыз
+git add .
+git commit -m "feat: жаңа функция қосылды"
+
+# 4. Push жасаңыз
+git push origin feature/жаңа-функция
+
+# 5. GitHub-та Pull Request жасаңыз
+```
+
+---
+
+## Commit хабарламалары форматы
+
+```
+feat: жаңа функция қосу
+fix: қате түзету
+docs: құжаттама жаңарту
+style: код форматтау
+refactor: кодты қайта жазу
+test: тест қосу
+```
+
+---
+
+## Жоба құрылымы
 
 ```
 TechStore/
-├── backend/          # FastAPI backend
-├── frontend/         # React frontend
-├── database/         # Database scripts
-├── nginx/            # Nginx конфигурациясы
-├── monitoring/       # Prometheus + Grafana
-├── terraform/        # Infrastructure as Code
-├── scripts/          # Utility scripts
-└── docs/             # Құжаттама
+├── backend/       — FastAPI (Python)
+├── frontend/      — React + Vite
+├── database/      — PostgreSQL скрипттері
+├── nginx/         — Reverse proxy
+├── monitoring/    — Prometheus + Grafana
+├── terraform/     — Infrastructure as Code
+├── scripts/       — Автоматтандыру скрипттері
+└── tests/         — Тесттер
 ```
 
-## Жаңа функция қосу
+---
 
-1. Issue жасаңыз немесе бар issue-ді таңдаңыз
-2. Feature branch жасаңыз
-3. Функцияны әзірлеңіз
-4. Тесттер жазыңыз
-5. Құжаттаманы жаңартыңыз
-6. PR жасаңыз
+## Код стандарттары
 
-## Қате табу
+**Backend (Python):**
+- PEP 8 стандартын сақтаңыз
+- Функцияларға type hints жазыңыз
+- Маңызды функцияларға docstring қосыңыз
 
-Қате тапсаңыз:
+**Frontend (React):**
+- Functional components қолданыңыз
+- Zustand store арқылы state басқарыңыз
+- CSS модульдерін пайдаланыңыз
 
-1. GitHub Issues-те тексеріңіз (қайталанбас үшін)
-2. Жаңа issue жасаңыз:
-   - Қатенің сипаттамасы
-   - Қайталау қадамдары
-   - Күтілетін нәтиже
-   - Нақты нәтиже
-   - Скриншоттар/логтар
+---
+
+## Қате тапсаңыз
+
+GitHub Issues бетінде жаңа issue жасаңыз:
+- Қатенің қысқаша сипаттамасы
+- Қайталау қадамдары
+- Скриншот немесе лог
+
+---
 
 ## Сұрақтар
 
-Сұрақтарыңыз болса:
-- GitHub Discussions қолданыңыз
-- Issue жасаңыз "question" тегімен
+Сұрақтарыңыз болса GitHub Discussions немесе Issues арқылы жазыңыз.
 
-## Лицензия
-
-Үлес қосу арқылы сіз өз кодыңызды MIT лицензиясымен келісесіз.
-
-## Алғыс
-
-Жобаға үлес қосқаныңыз үшін рахмет! 🎉
+Жобаға үлес қосқаныңыз үшін рахмет! 🙏
