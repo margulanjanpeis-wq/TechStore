@@ -11,6 +11,7 @@ import Register from './pages/Register'
 import Orders from './pages/Orders'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
+import Chatbot from './components/Chatbot'
 import './App.css'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
               </Routes>
             </main>
             <Footer />
+            <Chatbot />
           </div>
         } />
       </Routes>

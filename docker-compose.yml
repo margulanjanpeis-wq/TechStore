@@ -193,6 +193,37 @@ services:
       - techstore-network
     logging: *default-logging
 
+  # ── Nginx Exporter ────────────────────────────────────────────────────────
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:latest
+    container_name: techstore-nginx-exporter
+    restart: unless-stopped
+    command:
+      - --nginx.scrape-uri=http://nginx:80/stub_status
+    ports:
+      - "9113:9113"
+    depends_on:
+      - nginx
+    networks:
+      - techstore-network
+    logging: *default-logging
+
+  # ── PostgreSQL Exporter ────────────────────────────────────────────────────
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: techstore-postgres-exporter
+    restart: unless-stopped
+    environment:
+      DATA_SOURCE_NAME: "postgresql://techstore_user:${POSTGRES_PASSWORD:-techstore_pass_2024}@database:5432/techstore?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - techstore-network
+    logging: *default-logging
+
   # ── Node Exporter (host metrics) ───────────────────────────────────────────
   node-exporter:
     image: prom/node-exporter:latest
